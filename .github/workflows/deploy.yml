@@ -33,7 +33,7 @@ jobs:
 
           RSYNC_OPTS="-rlz --delete \
             --omit-dir-times --no-perms --no-owner --no-group \
-            --exclude-from=.resyncignore"
+            --exclude-from=.rsyncignore"
 
           rsync $RSYNC_OPTS -e "ssh -p ${{ secrets.SSH_PORT }}" ./ \
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:$DEST"
