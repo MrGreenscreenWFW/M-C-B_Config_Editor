@@ -470,7 +470,7 @@ if($current_data===null){
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MSCC Config Service</title>
+<title>LSSBot Config Service</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="shortcut icon" href="favicon.ico">
 <style>

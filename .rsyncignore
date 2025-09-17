@@ -1,0 +1,8 @@
+# Git und CI-Ordner nicht hochladen
+.git/
+.github/
+
+# Let's Encrypt / ACME-Ordner schützen
+.well-known/
+
+# Optional weitere Upload-Ordner schützen
