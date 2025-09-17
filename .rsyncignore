@@ -6,3 +6,7 @@
 .well-known/
 
 # Optional weitere Upload-Ordner schützen
+.gitignore
+.rsyncignore
+LICENSE
+README.md
