@@ -1,0 +1,34 @@
+name: Deploy to CP Server
+
+on:
+  push:
+    branches: [ main ]     # oder master / dein Branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Add host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Rsync files
+        run: |
+          RSYNC_OPTS="-az --delete --exclude=.git/ --exclude=.github/"
+          rsync $RSYNC_OPTS -e "ssh -p ${{ secrets.SSH_PORT }}" ./ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/tba-lssbc/htdocs/lssbc.tba.ovh/
+
+      - name: Fix permissions (optional)
+        run: |
+          ssh -p "${{ secrets.SSH_PORT }}" ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "find /home/tba-lssbc/htdocs/lssbc.tba.ovh -type f -name '*.php' -exec chmod 640 {} \; && \
+             find /home/tba-lssbc/htdocs/lssbc.tba.ovh -type d -exec chmod 750 {} \;"
