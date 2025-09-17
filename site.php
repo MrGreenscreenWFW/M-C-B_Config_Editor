@@ -1,7 +1,7 @@
 <?php
 /*
  * MSCC Config Service
- * Copyright: 2025 Timan Angerer
+ * Copyright: © 2025 Timan Angerer
  */
 
 // --- Debug bei Bedarf aktivieren ---
@@ -471,6 +471,8 @@ if($current_data===null){
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MSCC Config Service</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="shortcut icon" href="favicon.ico">
 <style>
 *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif}
 body{margin:0;background:#0b0c0f;color:#e6e6e6}
@@ -495,7 +497,7 @@ textarea{min-height:240px}
 </head>
 <body>
   <div class="header">
-    <h1 style="margin:0;font-size:18px">MSCC Config Service</h1>
+    <h1 style="margin:0;font-size:18px">LSS Bot Config Service</h1>
     <span class="hint">Nichts wird serverseitig gespeichert</span>
   </div>
 
