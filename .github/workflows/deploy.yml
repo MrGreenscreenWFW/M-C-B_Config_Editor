@@ -25,7 +25,7 @@ jobs:
         run: |
           RSYNC_OPTS="-az --delete --exclude=.git/ --exclude=.github/"
           rsync $RSYNC_OPTS -e "ssh -p ${{ secrets.SSH_PORT }}" ./ \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/git-deploy /htdocs/lssbc.tba.ovh/
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/git-deploy/htdocs/lssbc.tba.ovh/
 
       - name: Fix permissions (optional)
         run: |
