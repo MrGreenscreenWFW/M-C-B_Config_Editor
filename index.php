@@ -510,7 +510,7 @@ body {
 .card h2 { margin-top: 0; font-size: 18px; }
 
 .row {
-  display: grid; grid-template-columns: 300px 1fr; gap: 16px;
+  display: grid; grid-template-columns: 300px 1fr; gap: 30px;
   align-items: center; margin: 14px 0;
 }
 @media (max-width: 800px) {
@@ -519,6 +519,7 @@ body {
 .row > *:nth-child(2) {
   display: flex;           /* damit Checkboxen vertikal mittig bleiben */
   align-items: center;
+  padding-left: 20px;
 }
 
 .row > *:nth-child(2) input[type="text"],
