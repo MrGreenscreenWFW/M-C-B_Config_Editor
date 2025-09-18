@@ -1,6 +1,6 @@
 <?php
 /*
- * MSCC Config Service
+ * MSC Config Service
  * Copyright: © 2025 Timan Angerer
  */
 
