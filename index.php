@@ -529,6 +529,13 @@ body {
   margin-left: 8px;        /* ← Feintuning: 6–10 px je nach Geschmack */
   width: calc(100% - 8px); /* bleibt bündig zum rechten Rand */
 }
+.row > *:nth-child(3) input[type="text"],
+.row > *:nth-child(3) input[type="number"],
+.row > *:nth-child(3) textarea,
+.row > *:nth-child(3) select {
+  margin-left: 8px;        /* ← Feintuning: 6–10 px je nach Geschmack */
+  width: calc(100% - 8px); /* bleibt bündig zum rechten Rand */
+}
 
 .row > *:nth-child(2) input[type="checkbox"]{
   margin-left: 8px;        /* Checkbox startet am selben X-Punkt */
