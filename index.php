@@ -697,20 +697,28 @@ function toggleInfo(id, ev){
   el.classList.toggle('active');
 }
 
-function toggleInfo(id, ev){
-  if (ev){ ev.stopPropagation(); ev.preventDefault(); }
+function closeAllTooltips(exceptId){
   document.querySelectorAll('.info-wrap .desc.active').forEach(el=>{
-    if (el.id !== id) el.classList.remove('active');
+    if (!exceptId || el.id !== exceptId) el.classList.remove('active');
   });
-  const el = document.getElementById(id);
-  if (el) el.classList.toggle('active');
 }
 
-document.addEventListener('click', (e)=>{
-  if (!e.target.closest('.info-wrap')) {
-    document.querySelectorAll('.info-wrap .desc.active').forEach(el=>el.classList.remove('active'));
-  }
-});
+function toggleInfo(id, ev){
+  if (ev){ ev.stopPropagation(); ev.preventDefault(); }
+  const el = document.getElementById(id);
+  if (!el) return;
+  const willOpen = !el.classList.contains('active');
+  closeAllTooltips();           // erst alles schließen
+  if (willOpen) el.classList.add('active');
+}
+
+document.addEventListener('click', function(e){
+  if (!e.target.closest('.info-wrap')) closeAllTooltips();
+}, true);
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllTooltips(); });
+window.addEventListener('scroll', () => closeAllTooltips(), { passive: true });
+window.addEventListener('resize', () => closeAllTooltips());
 
 function preventDetailsToggleButAllowLinks(){
   document.querySelectorAll('details.group > summary').forEach(sum=>{
