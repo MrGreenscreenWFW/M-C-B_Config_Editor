@@ -329,7 +329,7 @@ function info_html($path){
   if(!isset($META[$path])) return '';
   $text = $META[$path];
   $id = 'info_'.md5($path);
-  return '<span class="info" onclick="toggleInfo(\''.$id.'\')" title="Info">i</span>'
+  return '<span class="info" onclick="toggleInfo(\''.$id.'\', event)" title="Info">i</span>'
        . '<div id="'.$id.'" class="desc"><div style="font-weight:600;margin-bottom:6px;">'.h($path).'</div>'
        . h($text).'</div>';
 }
@@ -560,6 +560,7 @@ details.group summary {
   align-items: center;
   gap: 8px;
   font-weight: 500;
+  color: #7aa2f7;
 }
 /*
 details.group[open] summary { color: #7aa2f7; pointer-events: none;}
@@ -673,22 +674,33 @@ function syncBeforeDownload(){
   });
   return true;
 }
-function toggleInfo(id) {
+
+function toggleInfo(id, ev){
+  if (ev) { ev.stopPropagation(); ev.preventDefault(); }
   const el = document.getElementById(id);
   if (!el) return;
   el.classList.toggle('active');
 }
 
-/* Einklappen von <details> verhindern, aber Links/Info erlauben */
+function lockDetailsOpen(){
+  document.querySelectorAll('details.group').forEach(d=>{
+    d.setAttribute('open','');
+    const sum = d.querySelector(':scope > summary');
+    if (!sum) return;
+    sum.addEventListener('click', e => { e.preventDefault(); });
+    sum.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Enter') e.preventDefault();
+    });
+  });
+}
+document.addEventListener('DOMContentLoaded', lockDetailsOpen);
+
 function preventDetailsToggleButAllowLinks(){
   document.querySelectorAll('details.group > summary').forEach(sum=>{
     sum.addEventListener('click', (e)=>{
-      // Wenn auf Link/Info-Button/Inputs geklickt wird -> erlauben
       if (e.target.closest('a, .info, button, input, label, textarea, select')) return;
-      // sonst: Toggle verhindern
       e.preventDefault();
     });
-    // Tastatur (Space/Enter) ebenfalls abfangen
     sum.addEventListener('keydown', (e)=>{
       if (e.key === ' ' || e.key === 'Enter'){
         if (!e.target.closest('a, .info, button, input, label, textarea, select')){
