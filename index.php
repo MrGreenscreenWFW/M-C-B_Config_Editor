@@ -522,26 +522,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 16px;   /* EINHEITLICHER linker Einzug */
+  padding-left: 16px;
 }
 
-/* alle Controls füllen die gleiche Breite */
+/* Felder füllen den Platz konsistent */
 .row > *:nth-child(2) input[type="text"],
 .row > *:nth-child(2) input[type="number"],
 .row > *:nth-child(2) textarea,
 .row > *:nth-child(2) select {
-  flex: 1;              /* gleiche Startlinie + gleiche Breite */
+  flex: 1;
+  min-width: 0;
+  max-width: 640px;       /* optional: begrenzt die Breite */
 }
 
 /* Checkboxen sauber mittig */
 .row > *:nth-child(2) input[type="checkbox"] {
-  flex: none;           /* bleibt kleine Box */
+  flex: none;
   width: 18px; height: 18px;
   accent-color: #7aa2f7;
 }
 
-input[type="text"], input[type="number"], textarea {
-  width: 60%; padding: 12px;
+input[type="text"], input[type="number"], textarea, select {
+  width: 100%;
+  padding: 12px;
   border: 1px solid #2a2f3a;
   border-radius: 10px;
   background: #0f1115;
@@ -549,7 +552,7 @@ input[type="text"], input[type="number"], textarea {
   font-size: 14px;
   transition: border-color .2s, box-shadow .2s;
 }
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
   border-color: #7aa2f7;
   box-shadow: 0 0 0 2px rgba(122,162,247,0.3);
   outline: none;
@@ -588,59 +591,57 @@ details.group summary {
   font-weight: 500;
   color: #7aa2f7;
 }
-/*
-details.group[open] summary { color: #7aa2f7; pointer-events: none;}
-*/
-.label-wrap{ display:flex; align-items:center; gap:8px; }
+/* details.group[open] summary { color: #7aa2f7; pointer-events: none; } */
 
-.label-cell{
+.label-wrap { display: flex; align-items: center; gap: 8px; }
+
+.label-cell {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   white-space: nowrap;
 }
-.label-cell strong{ font-weight: 600; }
+.label-cell strong { font-weight: 600; }
 
-.path-small{ display: none; }
+.path-small { display: none; }
 
-.info-wrap{
+.info-wrap {
   position: relative;
   display: inline-block;
   vertical-align: middle;
 }
 
-.info{
+.info {
   position: relative;
   z-index: 30;
-  display:inline-flex; align-items:center; justify-content:center;
-  width:18px; height:18px; border-radius:50%;
-  background:#2a2f3a; color:#9aa0a6; font-size:12px; cursor:pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #2a2f3a; color: #9aa0a6; font-size: 12px; cursor: pointer;
   transition: background .2s;
 }
-.info:hover{ background:#3a3f4a; }
+.info:hover { background: #3a3f4a; }
 
-.info-wrap .desc{
+.info-wrap .desc {
   display: none;
   position: absolute;
   top: 130%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
-  background:#1a1d23;
-  border:1px solid #2a2f3a;
-  border-radius:10px;
-  padding:10px 12px;
+  background: #1a1d23;
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+  padding: 10px 12px;
   max-width: min(60ch, 80vw);
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-  color:#9aa0a6; font-size:12px; line-height:1.4;
+  color: #9aa0a6; font-size: 12px; line-height: 1.4;
   pointer-events: auto;
 }
-.info-wrap .desc.active{ display:block; }
+.info-wrap .desc.active { display: block; }
 
-details.group > summary{ position: relative; overflow: visible; }
-
-.row, .card{ position: relative; overflow: visible !important; }
+details.group > summary { position: relative; overflow: visible; }
+.row, .card { position: relative; overflow: visible !important; }
 
 .ok { color: #22c55e; }
 .err { color: #ef4444; }
