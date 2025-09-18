@@ -329,9 +329,12 @@ function info_html($path){
   if(!isset($META[$path])) return '';
   $text = $META[$path];
   $id = 'info_'.md5($path);
-  return '<span class="info" onclick="toggleInfo(\''.$id.'\', event)" title="Info">i</span>'
-       . '<div id="'.$id.'" class="desc"><div style="font-weight:600;margin-bottom:6px;">'.h($path).'</div>'
-       . h($text).'</div>';
+  return '<span class="info-wrap">'
+       .   '<span class="info" onclick="toggleInfo(\''.$id.'\', event)" title="Info">i</span>'
+       .   '<div id="'.$id.'" class="desc"><div style="font-weight:600;margin-bottom:6px;">'.h($path).'</div>'
+       .     h($text)
+       .   '</div>'
+       . '</span>';
 }
 
 function render_fields_recursive($node, $path, $orig, $labels){
@@ -578,7 +581,15 @@ details.group[open] summary { color: #7aa2f7; pointer-events: none;}
 
 .path-small{ display: none; }
 
+.info-wrap{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .info{
+  position: relative;
+  z-index: 30;
   display:inline-flex; align-items:center; justify-content:center;
   width:18px; height:18px; border-radius:50%;
   background:#2a2f3a; color:#9aa0a6; font-size:12px; cursor:pointer;
@@ -586,23 +597,27 @@ details.group[open] summary { color: #7aa2f7; pointer-events: none;}
 }
 .info:hover{ background:#3a3f4a; }
 
-.desc{
-  display:none;
-}
-.desc.active{
-  display:block;
-  position:absolute;
-  top: 100%; left: 0;
-  z-index: 20;
+.info-wrap .desc{
+  display: none;
+  position: absolute;
+  top: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
   background:#1a1d23;
   border:1px solid #2a2f3a;
   border-radius:10px;
   padding:10px 12px;
-  margin-top:6px;
-  max-width: 60ch;
+  max-width: min(60ch, 80vw);
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   color:#9aa0a6; font-size:12px; line-height:1.4;
+  pointer-events: auto;
 }
+.info-wrap .desc.active{ display:block; }
+
+details.group > summary{ position: relative; overflow: visible; }
+
+.row, .card{ position: relative; overflow: visible !important; }
 
 .ok { color: #22c55e; }
 .err { color: #ef4444; }
