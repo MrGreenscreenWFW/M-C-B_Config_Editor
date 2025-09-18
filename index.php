@@ -328,7 +328,9 @@ function info_html($path){
   global $META;
   if(!isset($META[$path])) return '';
   $text = $META[$path];
-  return '<span class="info" title="'.h($text).'">i</span><div class="desc">'.h($text).'</div>';
+  $id = 'info_'.md5($path);
+  return '<span class="info" onclick="toggleInfo(\''.$id.'\')">i</span>'
+       . '<div id="'.$id.'" class="desc">'.h($text).'</div>';
 }
 
 function render_fields_recursive($node, $path, $orig, $labels){
@@ -556,18 +558,30 @@ details.group summary {
   gap: 8px;
   font-weight: 500;
 }
-details.group[open] summary { color: #7aa2f7; }
+details.group[open] summary { color: #7aa2f7; pointer-events: none;}
 
 .info {
-  display: inline-flex; align-items: center; justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 18px; height: 18px;
   border-radius: 50%;
   background: #2a2f3a;
   color: #9aa0a6;
   font-size: 12px;
   margin-left: 6px;
+  cursor: pointer;
+  transition: background .2s;
 }
-.desc { color: #9aa0a6; font-size: 12px; margin: 6px 0 12px 0; }
+.info:hover { background: #3a3f4a; }
+
+.desc {
+  display: none;   /* standardmäßig verstecken */
+  color: #9aa0a6;
+  font-size: 12px;
+  margin: 6px 0 12px 0;
+}
+.desc.active { display: block; }
 
 .ok { color: #22c55e; }
 .err { color: #ef4444; }
@@ -638,6 +652,11 @@ function syncBeforeDownload(){
     if(el && raw) el.value = raw.value;
   });
   return true;
+}
+function toggleInfo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('active');
 }
 </script>
 </body>
