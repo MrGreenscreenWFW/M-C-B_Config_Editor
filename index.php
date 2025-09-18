@@ -89,7 +89,7 @@ function prettify_name($key){
 
 $default = array(
   "environment" => array(
-    "country"  => "us",
+    "country"  => "de",
     "username" => "CHANGEME",
     "password" => "CHANGEME"
   ),
@@ -142,7 +142,7 @@ $default = array(
       "message" => array(
         "is_alliance_chat_enabled" => false,
         "is_enabled"               => false,
-        "scheme"                   => '{Address} - {Place}, ${Credits}' // single quotes im PHP-String -> kein Var-Expand
+        "scheme"                   => '{Address} - {Place}, ${Credits}'
       )
     ),
     "speech" => array(
@@ -166,21 +166,21 @@ $default = array(
 /* ==================== Meta-Beschreibungen (Tooltips) ==================== */
 $META = array(
   "environment" => "Login-Umgebung für den Spielserver.",
-  "environment.country"  => "Server-Land/Shard (z. B. us=missionchief.com, de=leitstellenspiel.de).",
+  "environment.country"  => "Server-Land (z.B. de=leitstellenspiel.de, us=missionchief.com).",
   "environment.username" => "Benutzername oder E-Mail für den Login.",
   "environment.password" => "Passwort für den Login.",
 
   "building" => "Einstellungen für Gebäudeaktionen.",
   "building.hire" => "Personal-Einstellungen (automatisches Hire).",
   "building.hire.is_enabled" => "Automatisches Einstellen aktivieren.",
-  "building.hire.default_amount" => "Hiring-Tage: 1–3, -1=automatisch (Premium).",
+  "building.hire.default_amount" => "Einstellungs Tage: 1–3, -1=automatisch (Premium).",
 
   "interval" => "Intervall (Sekunden) zwischen Missionstasks, Standard 3s.",
   "speed_step" => "Ingame-Geschwindigkeit: 0=pause, 1=turbo … 8=extrem langsam.",
 
-  "filter" => "Filter & Regeln für (Post-)Alarmierung.",
+  "filter" => "Filter & Regeln für (Weiter-)Alarmierung.",
   "filter.distance" => "Maximale Entfernung (km) für Missionen.",
-  "filter.is_enabled" => "Missionen (post-)alarmieren aktiv.",
+  "filter.is_enabled" => "Missionen (Weiter-)alarmieren aktiv.",
   "filter.is_events_enabled" => "Mission-Events berücksichtigen.",
   "filter.is_complete_vehicles_enabled" => "Nur alarmieren, wenn alle Fahrzeuge möglich sind.",
   "filter.is_complete_vehicles_list_enabled" => "Mehr Seiten laden für vollständige Liste (langsamer).",
@@ -197,8 +197,8 @@ $META = array(
   "filter.limit.credits.amount" => "Mindestgutschrift (Credits).",
   "filter.limit.credits.offset" => "Offset/Multiplikator für Credits.",
 
-  "filter.forward" => "Fahrzeuge voraus schicken (Voralarm).",
-  "filter.forward.is_enabled" => "Voralarm aktivieren.",
+  "filter.forward" => "Fahrzeuge weiter schicken.",
+  "filter.forward.is_enabled" => "Weiteralarmieren aktivieren.",
   "filter.forward.distance" => "Maximale Entfernung (km).",
   "filter.forward.estimated_duration" => "Max. Restzeit (Sekunden) bei fast erledigten Einsätzen.",
 
@@ -221,7 +221,7 @@ $META = array(
   "filter.alliance.is_stopover_enabled" => "Einsatz erneut öffnen.",
   "filter.alliance.is_vehicle_consider_enabled" => "Fahrzeuge der Mitglieder berücksichtigen.",
 
-  "filter.speech" => "Abgaben an Gebäude (Krankenhäuser/Gefängnisse).",
+  "filter.speech" => "Dispositionierung an Gebäude (Krankenhäuser/Gefängnisse).",
   "filter.speech.is_enabled" => "Automatisches Dispositionieren aktiv.",
   "filter.speech.distance" => "Maximale Entfernung zu Zielgebäuden.",
   "filter.speech.interval" => "Intervall (Sekunden) zwischen Speech-Tasks.",
@@ -235,7 +235,7 @@ $META = array(
   "filter.speech.alliance.tax" => "Max. Gebühren (0=aus)."
 );
 
-/* ==================== Labels (nur im Code ändern) ==================== */
+/* ==================== Labels ==================== */
 $LABELS_DEFAULT = array(
   "config" => "Konfiguration",
   "environment" => "Umgebung",
@@ -244,9 +244,9 @@ $LABELS_DEFAULT = array(
   "environment.password" => "Login-Passwort",
 
   "building" => "Gebäude",
-  "building.hire" => "Personal (Hire)",
+  "building.hire" => "Anwerben",
   "building.hire.is_enabled" => "Automatisch einstellen",
-  "building.hire.default_amount" => "Hiring-Tage",
+  "building.hire.default_amount" => "Einstellungs-Tage",
 
   "interval" => "Aufgaben-Intervall (Sek.)",
   "speed_step" => "Spielgeschwindigkeit",
@@ -270,9 +270,9 @@ $LABELS_DEFAULT = array(
   "filter.limit.credits.amount" => "Mindest-Credits",
   "filter.limit.credits.offset" => "Credits-Offset",
 
-  "filter.forward" => "Voralarm",
-  "filter.forward.is_enabled" => "Voralarm aktiv",
-  "filter.forward.distance" => "Voralarm-Entfernung (km)",
+  "filter.forward" => "Weiteralarm",
+  "filter.forward.is_enabled" => "Weiteralarm aktiv",
+  "filter.forward.distance" => "Weiteralarm-Entfernung (km)",
   "filter.forward.estimated_duration" => "Max. Restzeit (Sek.)",
 
   "filter.share" => "Teilen",
