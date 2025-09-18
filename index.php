@@ -329,8 +329,9 @@ function info_html($path){
   if(!isset($META[$path])) return '';
   $text = $META[$path];
   $id = 'info_'.md5($path);
-  return '<span class="info" onclick="toggleInfo(\''.$id.'\')">i</span>'
-       . '<div id="'.$id.'" class="desc">'.h($text).'</div>';
+  return '<span class="info" onclick="toggleInfo(\''.$id.'\')" title="Info">i</span>'
+       . '<div id="'.$id.'" class="desc"><div style="font-weight:600;margin-bottom:6px;">'.h($path).'</div>'
+       . h($text).'</div>';
 }
 
 function render_fields_recursive($node, $path, $orig, $labels){
@@ -367,12 +368,7 @@ function render_fields_recursive($node, $path, $orig, $labels){
     $field = '<input type="text" id="'.$id.'" name="form['.h($path).']" value="'.h($valStr).'">';
   }
 
-  // ⬇️ Info-Button + Beschreibung in die linke Spalte ziehen
-  $left = '<span class="label-wrap">'
-        .   '<strong>'.h($display).'</strong>'
-        .    info_html($path)
-        .   '<div class="path-small">'.h($path).'</div>'
-        . '</span>';
+  $left = '<span class="label-cell"><strong>'.h($display).'</strong>'.info_html($path).'</span>';
 
   return '<label class="row">'.$left.$field.'</label>';
 }
@@ -569,28 +565,42 @@ details.group[open] summary { color: #7aa2f7; pointer-events: none;}
 
 .label-wrap{ display:flex; align-items:center; gap:8px; }
 
-.info {
+.label-cell{
+  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: #2a2f3a;
-  color: #9aa0a6;
-  font-size: 12px;
-  margin-left: 6px;
-  cursor: pointer;
+  gap: 8px;
+  white-space: nowrap;
+}
+.label-cell strong{ font-weight: 600; }
+
+.path-small{ display: none; }
+
+.info{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:18px; height:18px; border-radius:50%;
+  background:#2a2f3a; color:#9aa0a6; font-size:12px; cursor:pointer;
   transition: background .2s;
 }
-.info:hover { background: #3a3f4a; }
+.info:hover{ background:#3a3f4a; }
 
-.desc {
-  display: none;   /* standardmäßig verstecken */
-  color: #9aa0a6;
-  font-size: 12px;
-  margin: 6px 0 12px 0;
+.desc{
+  display:none;
 }
-.desc.active { display: block; }
+.desc.active{
+  display:block;
+  position:absolute;
+  top: 100%; left: 0;
+  z-index: 20;
+  background:#1a1d23;
+  border:1px solid #2a2f3a;
+  border-radius:10px;
+  padding:10px 12px;
+  margin-top:6px;
+  max-width: 60ch;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  color:#9aa0a6; font-size:12px; line-height:1.4;
+}
 
 .ok { color: #22c55e; }
 .err { color: #ef4444; }
