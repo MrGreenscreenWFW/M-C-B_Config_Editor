@@ -354,7 +354,7 @@ function render_fields_recursive($node, $path, $orig, $labels){
   $id = 'f_'.md5($path);
   $valStr = (string)$node;
   $display = label_for_path($path, '', $labels);
-  $field = '';
+
   if(is_bool($node)){
     $checked = $node ? 'checked' : '';
     $field = '<input type="hidden" name="form['.h($path).']" value="0">'
@@ -367,7 +367,14 @@ function render_fields_recursive($node, $path, $orig, $labels){
     $field = '<input type="text" id="'.$id.'" name="form['.h($path).']" value="'.h($valStr).'">';
   }
 
-  return '<label class="row"><span><strong>'.h($display).'</strong><div class="path-small">'.h($path).'</div></span>'.$field.'</label>'.info_html($path);
+  // ⬇️ Info-Button + Beschreibung in die linke Spalte ziehen
+  $left = '<span class="label-wrap">'
+        .   '<strong>'.h($display).'</strong>'
+        .    info_html($path)
+        .   '<div class="path-small">'.h($path).'</div>'
+        . '</span>';
+
+  return '<label class="row">'.$left.$field.'</label>';
 }
 
 /* ==================== Request-Handling ==================== */
@@ -559,6 +566,8 @@ details.group summary {
   font-weight: 500;
 }
 details.group[open] summary { color: #7aa2f7; pointer-events: none;}
+
+.label-wrap{ display:flex; align-items:center; gap:8px; }
 
 .info {
   display: inline-flex;
