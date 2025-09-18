@@ -523,7 +523,7 @@ textarea{min-height:240px}
     </div>
 
     <div class="card">
-      <h2 style="margin:0 0 10px 0">Formular-Editor (alle Felder)</h2>
+      <h2 style="margin:0 0 10px 0">Formular-Editor</h2>
       <form method="post">
         <?php
           echo render_fields_recursive($current_data, '', $current_data, $current_labels);
