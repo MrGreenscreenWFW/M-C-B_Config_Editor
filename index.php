@@ -561,8 +561,9 @@ details.group summary {
   gap: 8px;
   font-weight: 500;
 }
+/*
 details.group[open] summary { color: #7aa2f7; pointer-events: none;}
-
+*/
 .label-wrap{ display:flex; align-items:center; gap:8px; }
 
 .label-cell{
@@ -677,6 +678,28 @@ function toggleInfo(id) {
   if (!el) return;
   el.classList.toggle('active');
 }
+
+/* Einklappen von <details> verhindern, aber Links/Info erlauben */
+function preventDetailsToggleButAllowLinks(){
+  document.querySelectorAll('details.group > summary').forEach(sum=>{
+    sum.addEventListener('click', (e)=>{
+      // Wenn auf Link/Info-Button/Inputs geklickt wird -> erlauben
+      if (e.target.closest('a, .info, button, input, label, textarea, select')) return;
+      // sonst: Toggle verhindern
+      e.preventDefault();
+    });
+    // Tastatur (Space/Enter) ebenfalls abfangen
+    sum.addEventListener('keydown', (e)=>{
+      if (e.key === ' ' || e.key === 'Enter'){
+        if (!e.target.closest('a, .info, button, input, label, textarea, select')){
+          e.preventDefault();
+        }
+      }
+    });
+  });
+}
+document.addEventListener('DOMContentLoaded', preventDetailsToggleButAllowLinks);
+
 </script>
 </body>
 </html>
