@@ -516,10 +516,23 @@ body {
 @media (max-width: 800px) {
   .row { grid-template-columns: 1fr; }
 }
-.row > *:nth-child(2){
-  display: flex;
+.row > *:nth-child(2) {
+  display: flex;           /* damit Checkboxen vertikal mittig bleiben */
   align-items: center;
-  padding-left: 4px;   /* Abstand nach links, feintunen (z. B. 6px oder 8px) */
+}
+
+.row > *:nth-child(2) input[type="text"],
+.row > *:nth-child(2) input[type="number"],
+.row > *:nth-child(2) textarea,
+.row > *:nth-child(2) select {
+  margin-left: 8px;        /* ← Feintuning: 6–10 px je nach Geschmack */
+  width: calc(100% - 8px); /* bleibt bündig zum rechten Rand */
+}
+
+.row > *:nth-child(2) input[type="checkbox"]{
+  margin-left: 8px;        /* Checkbox startet am selben X-Punkt */
+  width: 18px; height: 18px;
+  accent-color: #7aa2f7;
 }
 
 input[type="checkbox"]{
