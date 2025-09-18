@@ -372,8 +372,7 @@ function render_fields_recursive($node, $path, $orig, $labels){
   }
 
   $left = '<span class="label-cell"><strong>'.h($display).'</strong>'.info_html($path).'</span>';
-
-  return '<label class="row">'.$left.$field.'</label>';
+  return '<label class="row">'.$left.'<span class="ctrl">'.$field.'</span></label>';
 }
 
 /* ==================== Request-Handling ==================== */
@@ -517,28 +516,28 @@ body {
   .row { grid-template-columns: 1fr; }
 }
 
-/* rechte Spalte einheitlich formatieren */
-.row > *:nth-child(2) {
+/* Einheitlicher Container für alle Controls der rechten Spalte */
+.row .ctrl{
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 16px;
+  padding-left: 16px;        /* EIN linker Einzug für alle Feldtypen */
 }
 
-/* Felder füllen den Platz konsistent */
-.row > *:nth-child(2) input[type="text"],
-.row > *:nth-child(2) input[type="number"],
-.row > *:nth-child(2) textarea,
-.row > *:nth-child(2) select {
+/* Text-/Number-/Select-/Textarea füllen den Platz gleichmäßig */
+.row .ctrl input[type="text"],
+.row .ctrl input[type="number"],
+.row .ctrl textarea,
+.row .ctrl select{
   flex: 1;
-  min-width: 0;
-  max-width: 640px;       /* optional: begrenzt die Breite */
+  min-width: 0;              /* verhindert Überlauf im Flex-Container */
+  max-width: 640px;          /* optional: optische Maximalbreite */
 }
 
-/* Checkboxen sauber mittig */
-.row > *:nth-child(2) input[type="checkbox"] {
+/* Checkbox bleibt klein, startet aber auf derselben X-Linie */
+.row .ctrl input[type="checkbox"]{
   flex: none;
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
   accent-color: #7aa2f7;
 }
 
