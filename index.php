@@ -516,6 +516,19 @@ body {
 @media (max-width: 800px) {
   .row { grid-template-columns: 1fr; }
 }
+.row > *:nth-child(2){
+  display: flex;
+  align-items: center;
+  padding-left: 4px;   /* Abstand nach links, feintunen (z. B. 6px oder 8px) */
+}
+
+input[type="checkbox"]{
+  margin-left: 2px;    /* kleine Korrektur */
+  margin-right: 6px;   /* Abstand zur Beschriftung (falls du welche daneben hast) */
+  width: 18px; height: 18px;
+  accent-color: #7aa2f7;
+  cursor: pointer;
+}
 
 input[type="text"], input[type="number"], textarea {
   width: 60%; padding: 12px;
