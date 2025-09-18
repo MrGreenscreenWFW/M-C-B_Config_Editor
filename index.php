@@ -474,25 +474,103 @@ if($current_data===null){
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="shortcut icon" href="favicon.ico">
 <style>
-*{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif}
-body{margin:0;background:#0b0c0f;color:#e6e6e6}
-.header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#13151a;border-bottom:1px solid #2a2f3a}
-.container{max-width:1100px;margin:20px auto;padding:0 16px}
-.card{background:#13151a;border:1px solid #2a2f3a;border-radius:12px;padding:16px;margin-bottom:16px}
-.row{display:grid;grid-template-columns:360px 1fr;gap:12px;align-items:center;margin:10px 0}
-input[type="text"],input[type="number"],textarea{width:100%;padding:10px;border:1px solid #2a2f3a;border-radius:10px;background:#1a1d24;color:#e6e6e6}
-.btn{background:#7aa2f7;color:#fff;border:none;border-radius:10px;padding:10px 14px;cursor:pointer}
-.btn.secondary{background:transparent;color:#e6e6e6;border:1px solid #2a2f3a}
-.hint{color:#9aa0a6;font-size:12px}
-.ok{color:#22c55e}.err{color:#ef4444}
-.box{padding:12px;border:1px dashed #2a2f3a;border-radius:10px;background:#1a1d24;margin:10px 0}
-details.group summary{cursor:pointer;display:flex;align-items:center;gap:8px}
-.info{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#1a1d24;border:1px solid #2a2f3a;color:#9aa0a6;font-size:12px;margin-left:6px}
-.desc{color:#9aa0a6;font-size:12px;margin:4px 0 12px 0}
-.path{color:#9aa0a6;font-size:12px;margin-left:auto}
-.path-small{color:#9aa0a6;font-size:11px;margin-top:4px}
-textarea{min-height:240px}
-@media (max-width:900px){.row{grid-template-columns:1fr}}
+* { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+body {
+  margin: 0; padding: 0;
+  background: #0f1115; color: #eaeaea;
+  line-height: 1.5;
+}
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 24px;
+  background: #1a1d23;
+  border-bottom: 1px solid #2a2f3a;
+  position: sticky; top: 0; z-index: 10;
+}
+.header h1 { margin: 0; font-size: 20px; }
+.hint { color: #9aa0a6; font-size: 13px; }
+
+.container { max-width: 1200px; margin: 20px auto; padding: 0 16px; }
+.card {
+  background: #1a1d23;
+  border: 1px solid #2a2f3a;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.card h2 { margin-top: 0; font-size: 18px; }
+
+.row {
+  display: grid; grid-template-columns: 300px 1fr; gap: 16px;
+  align-items: center; margin: 14px 0;
+}
+@media (max-width: 800px) {
+  .row { grid-template-columns: 1fr; }
+}
+
+input[type="text"], input[type="number"], textarea {
+  width: 100%; padding: 12px;
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+  background: #0f1115;
+  color: #eaeaea;
+  font-size: 14px;
+  transition: border-color .2s, box-shadow .2s;
+}
+input:focus, textarea:focus {
+  border-color: #7aa2f7;
+  box-shadow: 0 0 0 2px rgba(122,162,247,0.3);
+  outline: none;
+}
+
+.btn {
+  display: inline-block;
+  background: #7aa2f7;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background .2s, transform .1s;
+}
+.btn:hover { background: #5f89e6; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn.secondary {
+  background: transparent;
+  border: 1px solid #2a2f3a;
+  color: #eaeaea;
+}
+.btn.secondary:hover { background: #2a2f3a; }
+
+details.group {
+  margin: 10px 0;
+  border-left: 3px solid #2a2f3a;
+  padding-left: 10px;
+}
+details.group summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+details.group[open] summary { color: #7aa2f7; }
+
+.info {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #2a2f3a;
+  color: #9aa0a6;
+  font-size: 12px;
+  margin-left: 6px;
+}
+.desc { color: #9aa0a6; font-size: 12px; margin: 6px 0 12px 0; }
+
+.ok { color: #22c55e; }
+.err { color: #ef4444; }
 </style>
 </head>
 <body>
