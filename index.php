@@ -510,45 +510,34 @@ body {
 .card h2 { margin-top: 0; font-size: 18px; }
 
 .row {
-  display: grid; grid-template-columns: 300px 1fr; gap: 80px;
+  display: grid; grid-template-columns: 300px 1fr; gap: 16px;
   align-items: center; margin: 14px 0;
 }
 @media (max-width: 800px) {
   .row { grid-template-columns: 1fr; }
 }
+
+/* rechte Spalte einheitlich formatieren */
 .row > *:nth-child(2) {
-  display: flex;           /* damit Checkboxen vertikal mittig bleiben */
+  display: flex;
   align-items: center;
-  padding-left: 60px;
+  justify-content: flex-start;
+  padding-left: 16px;   /* EINHEITLICHER linker Einzug */
 }
 
+/* alle Controls füllen die gleiche Breite */
 .row > *:nth-child(2) input[type="text"],
 .row > *:nth-child(2) input[type="number"],
 .row > *:nth-child(2) textarea,
 .row > *:nth-child(2) select {
-  margin-left: 8px;        /* ← Feintuning: 6–10 px je nach Geschmack */
-  width: calc(100% - 8px); /* bleibt bündig zum rechten Rand */
-}
-.row > *:nth-child(3) input[type="text"],
-.row > *:nth-child(3) input[type="number"],
-.row > *:nth-child(3) textarea,
-.row > *:nth-child(3) select {
-  margin-left: 8px;        /* ← Feintuning: 6–10 px je nach Geschmack */
-  width: calc(100% - 8px); /* bleibt bündig zum rechten Rand */
+  flex: 1;              /* gleiche Startlinie + gleiche Breite */
 }
 
-.row > *:nth-child(2) input[type="checkbox"]{
-  margin-left: 8px;        /* Checkbox startet am selben X-Punkt */
+/* Checkboxen sauber mittig */
+.row > *:nth-child(2) input[type="checkbox"] {
+  flex: none;           /* bleibt kleine Box */
   width: 18px; height: 18px;
   accent-color: #7aa2f7;
-}
-
-input[type="checkbox"]{
-  margin-left: 2px;    /* kleine Korrektur */
-  margin-right: 6px;   /* Abstand zur Beschriftung (falls du welche daneben hast) */
-  width: 18px; height: 18px;
-  accent-color: #7aa2f7;
-  cursor: pointer;
 }
 
 input[type="text"], input[type="number"], textarea {
