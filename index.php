@@ -519,7 +519,7 @@ body {
 .row > *:nth-child(2) {
   display: flex;           /* damit Checkboxen vertikal mittig bleiben */
   align-items: center;
-  padding-left: 20px;
+  padding-left: 60px;
 }
 
 .row > *:nth-child(2) input[type="text"],
