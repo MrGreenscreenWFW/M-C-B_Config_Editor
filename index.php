@@ -697,18 +697,20 @@ function toggleInfo(id, ev){
   el.classList.toggle('active');
 }
 
-function lockDetailsOpen(){
-  document.querySelectorAll('details.group').forEach(d=>{
-    d.setAttribute('open','');
-    const sum = d.querySelector(':scope > summary');
-    if (!sum) return;
-    sum.addEventListener('click', e => { e.preventDefault(); });
-    sum.addEventListener('keydown', e => {
-      if (e.key === ' ' || e.key === 'Enter') e.preventDefault();
-    });
+function toggleInfo(id, ev){
+  if (ev){ ev.stopPropagation(); ev.preventDefault(); }
+  document.querySelectorAll('.info-wrap .desc.active').forEach(el=>{
+    if (el.id !== id) el.classList.remove('active');
   });
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('active');
 }
-document.addEventListener('DOMContentLoaded', lockDetailsOpen);
+
+document.addEventListener('click', (e)=>{
+  if (!e.target.closest('.info-wrap')) {
+    document.querySelectorAll('.info-wrap .desc.active').forEach(el=>el.classList.remove('active'));
+  }
+});
 
 function preventDetailsToggleButAllowLinks(){
   document.querySelectorAll('details.group > summary').forEach(sum=>{
