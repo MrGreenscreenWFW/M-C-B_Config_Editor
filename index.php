@@ -518,7 +518,7 @@ body {
 }
 
 input[type="text"], input[type="number"], textarea {
-  width: 100%; padding: 12px;
+  width: 60%; padding: 12px;
   border: 1px solid #2a2f3a;
   border-radius: 10px;
   background: #0f1115;
@@ -621,6 +621,14 @@ details.group > summary{ position: relative; overflow: visible; }
 
 .ok { color: #22c55e; }
 .err { color: #ef4444; }
+
+#raw_area {
+  width: 100%;
+  height: 600px;
+  resize: vertical;
+  line-height: 1.4;
+}
+
 </style>
 </head>
 <body>
