@@ -1,10 +1,10 @@
 <?php
 /*
- * MSC Config Service
+ * LSS Bot Config Service (stateless)
  * Copyright: © 2025 Timan Angerer
  */
 
-// --- Debug bei Bedarf aktivieren ---
+// Debug bei Bedarf:
 // ini_set('display_errors','1'); error_reporting(E_ALL);
 
 /* ================= Hilfsfunktionen ================= */
@@ -509,35 +509,41 @@ body {
 .card h2 { margin-top: 0; font-size: 18px; }
 
 .row {
-  display: grid; grid-template-columns: 300px 1fr; gap: 16px;
-  align-items: center; margin: 14px 0;
+  display: grid;
+  grid-template-columns: 300px minmax(0,1fr);
+  gap: 16px;
+  align-items: center;
+  margin: 14px 0;
 }
 @media (max-width: 800px) {
   .row { grid-template-columns: 1fr; }
 }
 
-/* Einheitlicher Container für alle Controls der rechten Spalte */
+/* === Einheitliche Ausrichtung rechts ==================================== */
+:root { --ctrl-indent: 24px; }  /* Einzug der rechten Spalte */
+
 .row .ctrl{
   display: flex;
   align-items: center;
-  padding-left: 16px;        /* EIN linker Einzug für alle Feldtypen */
+  padding-left: var(--ctrl-indent);
 }
 
-/* Text-/Number-/Select-/Textarea füllen den Platz gleichmäßig */
 .row .ctrl input[type="text"],
 .row .ctrl input[type="number"],
 .row .ctrl textarea,
 .row .ctrl select{
   flex: 1;
-  min-width: 0;              /* verhindert Überlauf im Flex-Container */
-  max-width: 640px;          /* optional: optische Maximalbreite */
+  min-width: 0;
+  width: 100%;
+  max-width: 640px;   /* optional */
+  margin: 0;
 }
 
-/* Checkbox bleibt klein, startet aber auf derselben X-Linie */
 .row .ctrl input[type="checkbox"]{
   flex: none;
   width: 18px;
   height: 18px;
+  margin: 0;
   accent-color: #7aa2f7;
 }
 
@@ -590,7 +596,6 @@ details.group summary {
   font-weight: 500;
   color: #7aa2f7;
 }
-/* details.group[open] summary { color: #7aa2f7; pointer-events: none; } */
 
 .label-wrap { display: flex; align-items: center; gap: 8px; }
 
@@ -651,7 +656,6 @@ details.group > summary { position: relative; overflow: visible; }
   resize: vertical;
   line-height: 1.4;
 }
-
 </style>
 </head>
 <body>
@@ -684,9 +688,7 @@ details.group > summary { position: relative; overflow: visible; }
     <div class="card">
       <h2 style="margin:0 0 10px 0">Formular-Editor</h2>
       <form method="post">
-        <?php
-          echo render_fields_recursive($current_data, '', $current_data, $current_labels);
-        ?>
+        <?php echo render_fields_recursive($current_data, '', $current_data, $current_labels); ?>
         <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn" name="action" value="save_form">Änderungen anwenden</button>
           <button class="btn secondary" name="action" value="download" onclick="return syncBeforeDownload()">Herunterladen</button>
@@ -721,32 +723,23 @@ function syncBeforeDownload(){
   return true;
 }
 
-function toggleInfo(id, ev){
-  if (ev) { ev.stopPropagation(); ev.preventDefault(); }
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.classList.toggle('active');
-}
-
+/* Tooltips sauber öffnen/schließen */
 function closeAllTooltips(exceptId){
   document.querySelectorAll('.info-wrap .desc.active').forEach(el=>{
     if (!exceptId || el.id !== exceptId) el.classList.remove('active');
   });
 }
-
 function toggleInfo(id, ev){
   if (ev){ ev.stopPropagation(); ev.preventDefault(); }
   const el = document.getElementById(id);
   if (!el) return;
   const willOpen = !el.classList.contains('active');
-  closeAllTooltips();           // erst alles schließen
+  closeAllTooltips();
   if (willOpen) el.classList.add('active');
 }
-
 document.addEventListener('click', function(e){
   if (!e.target.closest('.info-wrap')) closeAllTooltips();
 }, true);
-
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllTooltips(); });
 window.addEventListener('scroll', () => closeAllTooltips(), { passive: true });
 window.addEventListener('resize', () => closeAllTooltips());
@@ -767,7 +760,6 @@ function preventDetailsToggleButAllowLinks(){
   });
 }
 document.addEventListener('DOMContentLoaded', preventDetailsToggleButAllowLinks);
-
 </script>
 </body>
 </html>
